@@ -1,0 +1,54 @@
+name: Build macOS Release
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Xcode
+        run: sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
+
+      - name: Build Release
+        env:
+          PROJECT: MACocr.xcodeproj
+          SCHEME: MACocr
+          CONFIGURATION: Release
+          DERIVED_DATA_PATH: ${{ github.workspace }}/.build
+        run: |
+          set -euo pipefail
+          rm -rf "$DERIVED_DATA_PATH"
+          xcodebuild \
+            -project "$PROJECT" \
+            -scheme "$SCHEME" \
+            -configuration "$CONFIGURATION" \
+            -derivedDataPath "$DERIVED_DATA_PATH" \
+            clean build
+
+      - name: Package app bundle
+        run: |
+          set -euo pipefail
+          ARTIFACTS_DIR="${{ github.workspace }}/artifacts"
+          APP_PATH="${{ github.workspace }}/.build/Build/Products/Release/MACocr.app"
+          mkdir -p "$ARTIFACTS_DIR"
+          cp -R "$APP_PATH" "$ARTIFACTS_DIR/"
+          ditto -c -k --sequesterRsrc --keepParent "$ARTIFACTS_DIR/MACocr.app" "$ARTIFACTS_DIR/MACocr-Release.zip"
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: MACocr-macOS-Release
+          path: |
+            artifacts/MACocr.app
+            artifacts/MACocr-Release.zip

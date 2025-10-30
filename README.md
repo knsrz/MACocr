@@ -228,6 +228,39 @@ MACocr/
 - 检查是否有其他应用占用 `⇧⌘5`
 - 可以通过菜单栏手动触发截图
 
+## 🚢 发布与打包
+
+我们提供了统一的脚本和 CI 流程，帮助你生成可直接用于 GitHub Releases 的 `MACocr.app`：
+
+### 本地构建 Release 版本
+
+```bash
+./scripts/build-release.sh
+```
+
+脚本会在根目录生成：
+
+- `artifacts/MACocr.app` – Release 模式编译出的应用包
+- `artifacts/MACocr-Release.zip` – 适合上传到 GitHub Releases 的压缩包
+
+> 需要在安装了 Xcode 的 macOS 环境中执行该脚本。
+
+### GitHub Actions 自动构建
+
+仓库内置的 [Build macOS Release](.github/workflows/build-macos.yml) 工作流会在以下场景自动运行：
+
+- 推送到 `main` 分支
+- 打开或更新 Pull Request
+- 通过 `workflow_dispatch` 手动触发
+- 发布新的 Release
+
+工作流会使用 `xcodebuild` 在 GitHub 托管的 macOS Runner 上完成编译，并在构建成功后上传以下产物：
+
+- `MACocr.app`
+- `MACocr-Release.zip`
+
+你可以在 Actions 结果页面下载它们并直接用于发布。
+
 ## 🤝 贡献指南
 
 欢迎提交 Issue 和 Pull Request！

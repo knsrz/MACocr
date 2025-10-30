@@ -170,9 +170,24 @@ print(ConfigurationManager.shared.currentConfig)
 
 ### 构建 Release 版本
 
+**方式一：命令行脚本（推荐）**
+
+```bash
+./scripts/build-release.sh
+```
+
+脚本会在 `artifacts/` 目录生成 `MACocr.app` 与 `MACocr-Release.zip`，方便上传 GitHub Releases。
+
+**方式二：Xcode GUI**
+
 1. 选择 Product → Archive
 2. 在 Organizer 中选择 Distribute App
 3. 选择发布方式（Developer ID, Mac App Store, etc.）
+
+### CI 构建
+
+- `.github/workflows/build-macos.yml` 会在 Push/PR/Release 时自动构建 Release 版本
+- 构建完成后可在 Actions 页面下载 `MACocr.app` 与 `MACocr-Release.zip`
 
 ### 代码签名
 
