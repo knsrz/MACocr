@@ -7,75 +7,231 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		MACocrApp.swift in Sources = {isa = PBXBuildFile; };
-		AppDelegate.swift in Sources = {isa = PBXBuildFile; };
-		ContentView.swift in Sources = {isa = PBXBuildFile; };
-		ScreenshotCapture.swift in Sources = {isa = PBXBuildFile; };
-		ConfigurationManager.swift in Sources = {isa = PBXBuildFile; };
-		APIService.swift in Sources = {isa = PBXBuildFile; };
-		SettingsView.swift in Sources = {isa = PBXBuildFile; };
-		ResultWindow.swift in Sources = {isa = PBXBuildFile; };
-		LoadingIndicator.swift in Sources = {isa = PBXBuildFile; };
-		Assets.xcassets in Resources = {isa = PBXBuildFile; };
+		444333333333333333333331 /* MACocrApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333333333333333333333331 /* MACocrApp.swift */; };
+		444333333333333333333332 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333333333333333333333332 /* AppDelegate.swift */; };
+		444333333333333333333333 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333333333333333333333333 /* ContentView.swift */; };
+		444333333333333333333335 /* ScreenshotCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333333333333333333333335 /* ScreenshotCapture.swift */; };
+		444333333333333333333336 /* ConfigurationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333333333333333333333336 /* ConfigurationManager.swift */; };
+		444333333333333333333337 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333333333333333333333337 /* APIService.swift */; };
+		444333333333333333333338 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333333333333333333333338 /* SettingsView.swift */; };
+		444333333333333333333339 /* ResultWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333333333333333333333339 /* ResultWindow.swift */; };
+		444333333333333333333340 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333333333333333333333340 /* LoadingIndicator.swift */; };
+		444333333333333333333341 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 333333333333333333333341 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		MACocr.app = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MACocr.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		333333333333333333333331 /* MACocrApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MACocrApp.swift; path = MACocrApp.swift; sourceTree = "<group>"; };
+		333333333333333333333332 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		333333333333333333333333 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ContentView.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		333333333333333333333334 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Info.plist; sourceTree = "<group>"; };
+		333333333333333333333335 /* ScreenshotCapture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ScreenshotCapture.swift; path = Core/ScreenshotCapture.swift; sourceTree = "<group>"; };
+		333333333333333333333336 /* ConfigurationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ConfigurationManager.swift; path = Core/ConfigurationManager.swift; sourceTree = "<group>"; };
+		333333333333333333333337 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = APIService.swift; path = Core/APIService.swift; sourceTree = "<group>"; };
+		333333333333333333333338 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingsView.swift; path = Views/SettingsView.swift; sourceTree = "<group>"; };
+		333333333333333333333339 /* ResultWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ResultWindow.swift; path = Views/ResultWindow.swift; sourceTree = "<group>"; };
+		333333333333333333333340 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoadingIndicator.swift; path = Views/LoadingIndicator.swift; sourceTree = "<group>"; };
+		333333333333333333333341 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Assets.xcassets; sourceTree = "<group>"; };
+		333333333333333333333350 /* MACocr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MACocr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
-		MainGroup = {
+		222222222222222222222222 /* MainGroup */ = {
 			isa = PBXGroup;
 			children = (
-				MACocr,
-				Products,
+				222222222222222222222224 /* MACocr */,
+				222222222222222222222223 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		Products = {
+		222222222222222222222223 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				MACocr.app,
+				333333333333333333333350 /* MACocr.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		MACocr = {
+		222222222222222222222224 /* MACocr */ = {
 			isa = PBXGroup;
 			children = (
-				Core,
-				Views,
-				Assets.xcassets,
-				MACocrApp.swift,
-				AppDelegate.swift,
-				ContentView.swift,
-				Info.plist,
+				222222222222222222222225 /* Core */,
+				222222222222222222222226 /* Views */,
+				333333333333333333333341 /* Assets.xcassets */,
+				333333333333333333333331 /* MACocrApp.swift */,
+				333333333333333333333332 /* AppDelegate.swift */,
+				333333333333333333333333 /* ContentView.swift */,
+				333333333333333333333334 /* Info.plist */,
 			);
 			path = MACocr;
 			sourceTree = "<group>";
 		};
-		Core = {
+		222222222222222222222225 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				ScreenshotCapture.swift,
-				ConfigurationManager.swift,
-				APIService.swift,
+				333333333333333333333335 /* ScreenshotCapture.swift */,
+				333333333333333333333336 /* ConfigurationManager.swift */,
+				333333333333333333333337 /* APIService.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
 		};
-		Views = {
+		222222222222222222222226 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				SettingsView.swift,
-				ResultWindow.swift,
-				LoadingIndicator.swift,
+				333333333333333333333338 /* SettingsView.swift */,
+				333333333333333333333339 /* ResultWindow.swift */,
+				333333333333333333333340 /* LoadingIndicator.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
+/* Begin PBXProject section */
+		111111111111111111111111 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1430;
+			};
+			buildConfigurationList = 777777777777777777777771 /* Build configuration list for PBXProject "MACocr" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 222222222222222222222222 /* MainGroup */;
+			productRefGroup = 222222222222222222222223 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				555555555555555555555555 /* MACocr */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXNativeTarget section */
+		555555555555555555555555 /* MACocr */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 777777777777777777777772 /* Build configuration list for PBXNativeTarget "MACocr" */;
+			buildPhases = (
+				666666666666666666666661 /* Sources */,
+				666666666666666666666662 /* Resources */,
+				666666666666666666666663 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MACocr;
+			productName = MACocr;
+			productReference = 333333333333333333333350 /* MACocr.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXSourcesBuildPhase section */
+		666666666666666666666661 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				444333333333333333333331 /* MACocrApp.swift in Sources */,
+				444333333333333333333332 /* AppDelegate.swift in Sources */,
+				444333333333333333333333 /* ContentView.swift in Sources */,
+				444333333333333333333335 /* ScreenshotCapture.swift in Sources */,
+				444333333333333333333336 /* ConfigurationManager.swift in Sources */,
+				444333333333333333333337 /* APIService.swift in Sources */,
+				444333333333333333333338 /* SettingsView.swift in Sources */,
+				444333333333333333333339 /* ResultWindow.swift in Sources */,
+				444333333333333333333340 /* LoadingIndicator.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXResourcesBuildPhase section */
+		666666666666666666666662 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				444333333333333333333341 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		666666666666666666666663 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		888111111111111111111111 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "MACocr/Info.plist";
+				DEVELOPMENT_TEAM = "";
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		888111111111111111111112 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "MACocr/Info.plist";
+				DEVELOPMENT_TEAM = "";
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		889111111111111111111111 /* Target Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		889111111111111111111112 /* Target Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		777777777777777777777771 /* Build configuration list for PBXProject "MACocr" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				888111111111111111111111 /* Debug */,
+				888111111111111111111112 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		777777777777777777777772 /* Build configuration list for PBXNativeTarget "MACocr" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				889111111111111111111111 /* Target Debug */,
+				889111111111111111111112 /* Target Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
 	};
-	rootObject = MainProject;
+	rootObject = 111111111111111111111111 /* Project object */;
 }
