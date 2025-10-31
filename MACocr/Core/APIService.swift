@@ -270,22 +270,17 @@ class APIService {
         
         let (data, response) = try await session.data(for: request)
         
+        // validateResponse 会自动处理所有错误情况
         try validateResponse(response, data: data)
         
-        // 验证响应格式是否正确
-        guard let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else {
-            throw APIError.decodingError
-        }
-        
-        // 检查是否有错误信息
-        if let error = json["error"] as? [String: Any],
-           let message = error["message"] as? String {
-            throw APIError.apiError(message)
-        }
-        
-        // 验证响应结构
-        guard let choices = json["choices"] as? [[String: Any]],
+        // 验证响应格式是否正确（确保有有效的响应结构）
+        guard let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+              let choices = json["choices"] as? [[String: Any]],
               !choices.isEmpty else {
+            // 如果结构不对，打印响应内容以便调试
+            if let dataString = String(data: data, encoding: .utf8) {
+                throw APIError.apiError("响应格式无效。响应内容: \(dataString)")
+            }
             throw APIError.decodingError
         }
         
@@ -322,22 +317,16 @@ class APIService {
         
         let (data, response) = try await session.data(for: request)
         
+        // validateResponse 会自动处理所有错误情况
         try validateResponse(response, data: data)
         
         // 验证响应格式是否正确
-        guard let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else {
-            throw APIError.decodingError
-        }
-        
-        // 检查是否有错误信息
-        if let error = json["error"] as? [String: Any],
-           let message = error["message"] as? String {
-            throw APIError.apiError(message)
-        }
-        
-        // 验证响应结构
-        guard let content = json["content"] as? [[String: Any]],
+        guard let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+              let content = json["content"] as? [[String: Any]],
               !content.isEmpty else {
+            if let dataString = String(data: data, encoding: .utf8) {
+                throw APIError.apiError("响应格式无效。响应内容: \(dataString)")
+            }
             throw APIError.decodingError
         }
         
@@ -374,18 +363,15 @@ class APIService {
         
         let (data, response) = try await session.data(for: request)
         
+        // validateResponse 会自动处理所有错误情况
         try validateResponse(response, data: data)
         
-        // 验证响应格式是否正确
-        guard let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else {
-            throw APIError.decodingError
-        }
-        
-        // 检查是否有错误信息
-        if let errorCode = json["error_code"] as? Int,
-           errorCode != 0,
-           let errorMsg = json["error_msg"] as? String {
-            throw APIError.apiError(errorMsg)
+        // 百度 API 特殊处理：即使 HTTP 200 也可能有错误
+        if let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+           let errorCode = json["error_code"] as? Int,
+           errorCode != 0 {
+            let errorMsg = json["error_msg"] as? String ?? "未知错误"
+            throw APIError.apiError("百度 API 错误 (\(errorCode)): \(errorMsg)")
         }
         
         return "连接成功！API 配置有效。"
@@ -408,13 +394,31 @@ class APIService {
         default:
             // 尝试解析错误响应中的详细信息
             var errorMessage = "HTTP \(httpResponse.statusCode)"
+            var errorDetails: [String] = []
             
             if let data = data,
                let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] {
                 // OpenAI/OpenRouter 风格的错误格式
-                if let error = json["error"] as? [String: Any],
-                   let message = error["message"] as? String {
-                    errorMessage = message
+                if let error = json["error"] as? [String: Any] {
+                    if let message = error["message"] as? String {
+                        errorMessage = message
+                    }
+                    // 获取额外的错误详情
+                    if let code = error["code"] as? String {
+                        errorDetails.append("错误码: \(code)")
+                    }
+                    if let type = error["type"] as? String {
+                        errorDetails.append("类型: \(type)")
+                    }
+                    // OpenRouter 特定的 metadata
+                    if let metadata = error["metadata"] as? [String: Any] {
+                        if let providerName = metadata["provider_name"] as? String {
+                            errorDetails.append("提供商: \(providerName)")
+                        }
+                        if let raw = metadata["raw"] as? String {
+                            errorDetails.append("原始错误: \(raw)")
+                        }
+                    }
                 }
                 // 或者直接在顶层的 error 字段
                 else if let error = json["error"] as? String {
@@ -423,6 +427,18 @@ class APIService {
                 // 或者 message 字段
                 else if let message = json["message"] as? String {
                     errorMessage = message
+                }
+                
+                // 如果有额外的详情，添加到错误消息中
+                if !errorDetails.isEmpty {
+                    errorMessage += "\n" + errorDetails.joined(separator: "\n")
+                }
+                
+                // 如果还是没有获取到有用信息，尝试将整个 JSON 转换为字符串
+                if errorMessage == "HTTP \(httpResponse.statusCode)",
+                   let jsonData = try? JSONSerialization.data(withJSONObject: json, options: .prettyPrinted),
+                   let jsonString = String(data: jsonData, encoding: .utf8) {
+                    errorMessage += "\n响应内容: \(jsonString)"
                 }
             }
             
