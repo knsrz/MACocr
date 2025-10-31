@@ -124,12 +124,42 @@ class APIService {
         guard let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
               let choices = json["choices"] as? [[String: Any]],
               let firstChoice = choices.first,
-              let message = firstChoice["message"] as? [String: Any],
-              let content = message["content"] as? String else {
+              let message = firstChoice["message"] as? [String: Any] else {
             throw APIError.decodingError
         }
-        
-        return content.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        if let contentString = message["content"] as? String {
+            return contentString.trimmingCharacters(in: .whitespacesAndNewlines)
+        }
+
+        if let contentArray = message["content"] as? [[String: Any]] {
+            let extractedText = contentArray.compactMap { item -> String? in
+                if let text = item["text"] as? String {
+                    return text
+                }
+
+                if let text = item["content"] as? String {
+                    return text
+                }
+
+                // 一些服务商会使用 "output_text" 或类似的类型标记
+                if let type = item["type"] as? String,
+                   type == "output_text",
+                   let text = item["text"] as? String ?? item["content"] as? String {
+                    return text
+                }
+
+                return nil
+            }
+
+            if !extractedText.isEmpty {
+                return extractedText
+                    .joined(separator: "\n")
+                    .trimmingCharacters(in: .whitespacesAndNewlines)
+            }
+        }
+
+        throw APIError.decodingError
     }
     
     // MARK: - Anthropic API
@@ -167,13 +197,24 @@ class APIService {
         try validateResponse(response, data: data)
         
         guard let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
-              let content = json["content"] as? [[String: Any]],
-              let firstContent = content.first,
-              let text = firstContent["text"] as? String else {
+              let content = json["content"] as? [[String: Any]] else {
             throw APIError.decodingError
         }
-        
-        return text.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        let extractedText = content.compactMap { item -> String? in
+            if let text = item["text"] as? String {
+                return text
+            }
+            return nil
+        }
+
+        guard !extractedText.isEmpty else {
+            throw APIError.decodingError
+        }
+
+        return extractedText
+            .joined(separator: "\n")
+            .trimmingCharacters(in: .whitespacesAndNewlines)
     }
     
     // MARK: - Baidu API
