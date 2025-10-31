@@ -173,19 +173,31 @@ struct SettingsView: View {
     }
     
     private func testConfiguration() {
-        // 简单的验证
+        // 验证必填字段
         if config.apiKey.isEmpty {
             alertMessage = "请先填写 API 密钥"
             showingAlert = true
             return
         }
         
+        if config.endpoint.isEmpty {
+            alertMessage = "请先填写 API 端点"
+            showingAlert = true
+            return
+        }
+        
+        if config.model.isEmpty {
+            alertMessage = "请先填写模型名称"
+            showingAlert = true
+            return
+        }
+        
         Task {
             do {
-                // 这里可以添加实际的 API 测试逻辑
-                try await Task.sleep(nanoseconds: 1_000_000_000)
+                // 调用实际的 API 测试
+                let result = try await APIService.shared.testConnection(config: config)
                 await MainActor.run {
-                    alertMessage = "连接测试成功！"
+                    alertMessage = result
                     showingAlert = true
                 }
             } catch {
