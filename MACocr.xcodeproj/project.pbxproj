@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		737E0D4DB53D47478E474A41 /* ProcessingWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9539CD441F44728719F530 /* ProcessingWindow.swift */; };
 		444333333333333333333331 /* MACocrApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333333333333333333333331 /* MACocrApp.swift */; };
 		444333333333333333333332 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333333333333333333333332 /* AppDelegate.swift */; };
 		444333333333333333333333 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333333333333333333333333 /* ContentView.swift */; };
@@ -18,6 +17,7 @@
 		444333333333333333333339 /* ResultWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333333333333333333333339 /* ResultWindow.swift */; };
 		444333333333333333333340 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333333333333333333333340 /* LoadingIndicator.swift */; };
 		444333333333333333333341 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 333333333333333333333341 /* Assets.xcassets */; };
+		737E0D4DB53D47478E474A41 /* ProcessingWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9539CD441F44728719F530 /* ProcessingWindow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,14 +30,24 @@
 		333333333333333333333337 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		333333333333333333333338 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		333333333333333333333339 /* ResultWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultWindow.swift; sourceTree = "<group>"; };
-		CB9539CD441F44728719F530 /* ProcessingWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessingWindow.swift; sourceTree = "<group>"; };
 		333333333333333333333340 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 		333333333333333333333341 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		333333333333333333333350 /* MACocr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MACocr.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CB9539CD441F44728719F530 /* ProcessingWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessingWindow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFrameworksBuildPhase section */
+		666666666666666666666663 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
 /* Begin PBXGroup section */
-		222222222222222222222222 /* MainGroup */ = {
+		222222222222222222222222 = {
 			isa = PBXGroup;
 			children = (
 				222222222222222222222224 /* MACocr */,
@@ -70,7 +80,7 @@
 		222222222222222222222225 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				CB9539CD441F44728719F530 /* ProcessingWindow.swift */,
+				
 				333333333333333333333335 /* ScreenshotCapture.swift */,
 				333333333333333333333336 /* ConfigurationManager.swift */,
 				333333333333333333333337 /* APIService.swift */,
@@ -84,34 +94,12 @@
 				333333333333333333333338 /* SettingsView.swift */,
 				333333333333333333333339 /* ResultWindow.swift */,
 				333333333333333333333340 /* LoadingIndicator.swift */,
+				CB9539CD441F44728719F530 /* ProcessingWindow.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
-
-/* Begin PBXProject section */
-		111111111111111111111111 /* Project object */ = {
-			isa = PBXProject;
-			attributes = {
-				LastUpgradeCheck = 1430;
-			};
-			buildConfigurationList = 777777777777777777777771 /* Build configuration list for PBXProject "MACocr" */;
-			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
-			hasScannedForEncodings = 0;
-			knownRegions = (
-				en,
-			);
-			mainGroup = 222222222222222222222222 /* MainGroup */;
-			productRefGroup = 222222222222222222222223 /* Products */;
-			projectDirPath = "";
-			projectRoot = "";
-			targets = (
-				555555555555555555555555 /* MACocr */,
-			);
-		};
-/* End PBXProject section */
 
 /* Begin PBXNativeTarget section */
 		555555555555555555555555 /* MACocr */ = {
@@ -133,6 +121,41 @@
 		};
 /* End PBXNativeTarget section */
 
+/* Begin PBXProject section */
+		111111111111111111111111 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 2600;
+			};
+			buildConfigurationList = 777777777777777777777771 /* Build configuration list for PBXProject "MACocr" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 222222222222222222222222;
+			productRefGroup = 222222222222222222222223 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				555555555555555555555555 /* MACocr */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		666666666666666666666662 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				444333333333333333333341 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		666666666666666666666661 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -153,36 +176,46 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXResourcesBuildPhase section */
-		666666666666666666666662 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				444333333333333333333341 /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
-
-/* Begin PBXFrameworksBuildPhase section */
-		666666666666666666666663 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXFrameworksBuildPhase section */
-
 /* Begin XCBuildConfiguration section */
 		888111111111111111111111 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				INFOPLIST_FILE = "MACocr/Info.plist";
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = "";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = MACocr/Info.plist;
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -190,25 +223,59 @@
 		888111111111111111111112 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				INFOPLIST_FILE = "MACocr/Info.plist";
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = "";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = MACocr/Info.plist;
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
-		889111111111111111111111 /* Target Debug */ = {
+		889111111111111111111111 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				DEAD_CODE_STRIPPING = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
-		889111111111111111111112 /* Target Release */ = {
+		889111111111111111111112 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				DEAD_CODE_STRIPPING = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -228,14 +295,13 @@
 		777777777777777777777772 /* Build configuration list for PBXNativeTarget "MACocr" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				889111111111111111111111 /* Target Debug */,
-				889111111111111111111112 /* Target Release */,
+				889111111111111111111111 /* Debug */,
+				889111111111111111111112 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
 	};
 	rootObject = 111111111111111111111111 /* Project object */;
 }

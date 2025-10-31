@@ -83,7 +83,6 @@ struct ProcessingView: View {
                 Image(systemName: "text.viewfinder")
                     .font(.system(size: 60))
                     .foregroundColor(.accentColor)
-                    .symbolEffect(.pulse, options: .repeating)
             } else if viewModel.errorMessage != nil {
                 Image(systemName: "exclamationmark.triangle")
                     .font(.system(size: 60))
