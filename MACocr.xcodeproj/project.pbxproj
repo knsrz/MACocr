@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		737E0D4DB53D47478E474A41 /* ProcessingWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9539CD441F44728719F530 /* ProcessingWindow.swift */; };
 		444333333333333333333331 /* MACocrApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333333333333333333333331 /* MACocrApp.swift */; };
 		444333333333333333333332 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333333333333333333333332 /* AppDelegate.swift */; };
 		444333333333333333333333 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333333333333333333333333 /* ContentView.swift */; };
@@ -29,6 +30,7 @@
 		333333333333333333333337 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		333333333333333333333338 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		333333333333333333333339 /* ResultWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultWindow.swift; sourceTree = "<group>"; };
+		CB9539CD441F44728719F530 /* ProcessingWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessingWindow.swift; sourceTree = "<group>"; };
 		333333333333333333333340 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 		333333333333333333333341 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		333333333333333333333350 /* MACocr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MACocr.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -68,6 +70,7 @@
 		222222222222222222222225 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				CB9539CD441F44728719F530 /* ProcessingWindow.swift */,
 				333333333333333333333335 /* ScreenshotCapture.swift */,
 				333333333333333333333336 /* ConfigurationManager.swift */,
 				333333333333333333333337 /* APIService.swift */,
@@ -135,6 +138,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				737E0D4DB53D47478E474A41 /* ProcessingWindow.swift in Sources */,
 				444333333333333333333331 /* MACocrApp.swift in Sources */,
 				444333333333333333333332 /* AppDelegate.swift in Sources */,
 				444333333333333333333333 /* ContentView.swift in Sources */,

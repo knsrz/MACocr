@@ -12,6 +12,7 @@ import SwiftUI
 class ScreenshotCapture: NSObject, @unchecked Sendable {
     private var eventHandler: EventHandlerRef?
     private var hotKeyID = EventHotKeyID(signature: FourCharCode("ocr ") ?? 0x6F637220, id: 1)
+    private var processingWindow: ProcessingWindow?
     
     /// 注册全局快捷键 (Shift + Command + 5)
     func registerGlobalHotkey() {
@@ -80,16 +81,30 @@ class ScreenshotCapture: NSObject, @unchecked Sendable {
             return
         }
         
+        // 显示处理窗口
+        processingWindow = ProcessingWindow(
+            contentRect: NSRect.zero,
+            styleMask: [.titled, .closable],
+            backing: .buffered,
+            defer: false
+        )
+        processingWindow?.show()
+        processingWindow?.updateStatus("正在转换图像...")
+        processingWindow?.updateProgress(0.2)
+        
         // 转换为 PNG 并进行 Base64 编码
         guard let pngData = image.pngData(),
               let base64String = pngData.base64EncodedString() as String? else {
-            showAlert(title: "错误", message: "图像转换失败")
+            processingWindow?.showError("图像转换失败")
             try? FileManager.default.removeItem(atPath: filePath)
             return
         }
         
         // 清理临时文件
         try? FileManager.default.removeItem(atPath: filePath)
+        
+        processingWindow?.updateStatus("正在发送到API...")
+        processingWindow?.updateProgress(0.4)
         
         // 调用 API 进行 OCR
         performOCR(with: base64String)
@@ -99,10 +114,8 @@ class ScreenshotCapture: NSObject, @unchecked Sendable {
         let apiService = APIService.shared
         let config = ConfigurationManager.shared.currentConfig
         
-        // 显示加载提示
-        DispatchQueue.main.async {
-            NotificationCenter.default.post(name: .ocrStarted, object: nil)
-        }
+        processingWindow?.updateStatus("正在识别文字...")
+        processingWindow?.updateProgress(0.6)
         
         Task {
             do {
@@ -112,12 +125,17 @@ class ScreenshotCapture: NSObject, @unchecked Sendable {
                 )
                 
                 DispatchQueue.main.async {
-                    self.handleOCRResult(result)
+                    self.processingWindow?.updateStatus("识别完成！")
+                    self.processingWindow?.updateProgress(1.0)
+                    
+                    // 短暂延迟后显示结果
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        self.handleOCRResult(result)
+                    }
                 }
             } catch {
                 DispatchQueue.main.async {
-                    self.showAlert(title: "OCR 失败", message: error.localizedDescription)
-                    NotificationCenter.default.post(name: .ocrCompleted, object: nil)
+                    self.processingWindow?.showError(error.localizedDescription)
                 }
             }
         }
@@ -129,9 +147,8 @@ class ScreenshotCapture: NSObject, @unchecked Sendable {
         pasteboard.clearContents()
         pasteboard.setString(text, forType: .string)
         
-        // 显示结果窗口
-        let resultWindow = ResultWindow(text: text)
-        resultWindow.show()
+        // 通过处理窗口显示结果
+        processingWindow?.showResult(text)
         
         NotificationCenter.default.post(name: .ocrCompleted, object: text)
     }
