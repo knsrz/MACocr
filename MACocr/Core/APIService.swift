@@ -263,7 +263,7 @@ class APIService {
                     ]
                 ]
             ],
-            "max_tokens": 10
+            "max_tokens": 50  // 使用 50 tokens 进行测试（满足最小 16 的要求）
         ]
         
         request.httpBody = try JSONSerialization.data(withJSONObject: payload)
@@ -294,7 +294,7 @@ class APIService {
         
         let payload: [String: Any] = [
             "model": config.model,
-            "max_tokens": 10,
+            "max_tokens": 50,  // 使用 50 tokens 进行测试
             "messages": [
                 [
                     "role": "user",
