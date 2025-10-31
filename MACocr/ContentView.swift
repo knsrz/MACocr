@@ -59,6 +59,7 @@ struct ContentView: View {
         .sheet(isPresented: $showingSettings) {
             SettingsView()
                 .environmentObject(configManager)
+                .interactiveDismissDisabled(false)
         }
     }
 }

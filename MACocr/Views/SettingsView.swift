@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @Environment(\.dismiss) var dismiss
     @EnvironmentObject var configManager: ConfigurationManager
     @State private var config: OCRConfiguration
     @State private var showingAlert = false
     @State private var alertMessage = ""
+    @State private var shouldDismissAfterAlert = false
     
     init() {
         _config = State(initialValue: ConfigurationManager.shared.currentConfig)
@@ -25,6 +27,15 @@ struct SettingsView: View {
                     .font(.title2)
                     .fontWeight(.semibold)
                 Spacer()
+                Button(action: {
+                    dismiss()
+                }) {
+                    Image(systemName: "xmark.circle.fill")
+                        .font(.title2)
+                        .foregroundStyle(.secondary)
+                }
+                .buttonStyle(.plain)
+                .help("关闭设置")
             }
             .padding()
             .background(Color(NSColor.windowBackgroundColor))
@@ -95,6 +106,12 @@ struct SettingsView: View {
             
             // 底部按钮
             HStack {
+                Button("取消") {
+                    dismiss()
+                }
+                .buttonStyle(.bordered)
+                .keyboardShortcut(.cancelAction)
+                
                 Button("重置所有设置") {
                     config = .default
                 }
@@ -117,7 +134,11 @@ struct SettingsView: View {
         }
         .frame(width: 600, height: 700)
         .alert("提示", isPresented: $showingAlert) {
-            Button("确定", role: .cancel) { }
+            Button("确定", role: .cancel) {
+                if shouldDismissAfterAlert {
+                    dismiss()
+                }
+            }
         } message: {
             Text(alertMessage)
         }
@@ -126,24 +147,28 @@ struct SettingsView: View {
     private func saveConfiguration() {
         guard !config.apiKey.isEmpty else {
             alertMessage = "请填写 API 密钥"
+            shouldDismissAfterAlert = false
             showingAlert = true
             return
         }
         
         guard !config.endpoint.isEmpty else {
             alertMessage = "请填写 API 端点"
+            shouldDismissAfterAlert = false
             showingAlert = true
             return
         }
         
         guard !config.model.isEmpty else {
             alertMessage = "请填写模型名称"
+            shouldDismissAfterAlert = false
             showingAlert = true
             return
         }
         
         configManager.currentConfig = config
         alertMessage = "配置已保存"
+        shouldDismissAfterAlert = true
         showingAlert = true
     }
     

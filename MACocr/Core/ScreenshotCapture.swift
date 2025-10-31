@@ -9,9 +9,9 @@ import Cocoa
 import Carbon
 import SwiftUI
 
-class ScreenshotCapture: NSObject {
+class ScreenshotCapture: NSObject, @unchecked Sendable {
     private var eventHandler: EventHandlerRef?
-    private var hotKeyID = EventHotKeyID(signature: FourCharCode("ocr "), id: 1)
+    private var hotKeyID = EventHotKeyID(signature: FourCharCode("ocr ") ?? 0x6F637220, id: 1)
     
     /// 注册全局快捷键 (Shift + Command + 5)
     func registerGlobalHotkey() {
