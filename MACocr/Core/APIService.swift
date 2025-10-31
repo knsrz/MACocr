@@ -222,12 +222,10 @@ class APIService {
     // MARK: - Test Connection
     
     func testConnection(config: OCRConfiguration) async throws -> String {
-        // 使用一个有效的测试图片（100x100像素的简单蓝色方块PNG）
-        // 这是一个真实的、格式正确的PNG图片，包含 "TEST" 文本
-        // 满足大多数 API 的最小尺寸要求（100x100 = 10000 像素）
-        let testImageBase64 = """
-        iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAIESURBVHic7d0xTsMwFIDhF4kBMTAwcgROwAFgYOYAnIGJC3AEbsABGDkBM0dgQGJAqkQrVUJqnTp27H9f3SV1/j62X5w0TQEAAAAAAAAAAAAAAAAAAICZWbQewIzs27ZdSbqSdC7pVNKJpGNJR5KW7Us/JL1JelX/frwO6e2w+XAmXdv3RtKzpEdJD5IeyrLsWg9sN6xaD6Ch87IsN60HMYQMuZd023oQP5AhT2VZXrYexHdlyF3rAfzghww5KMtyv/Ug9vLSekDbxDBkN7GnxH+2Ojx6HJxS/1ltJd1JupH0KOm17Ms+S/ootTtKfWr9vXac+tt2XGrLAQAAAAAAAAAAAAAAAAAAAAAAAAAAzMGy9QBG0tXtopxvUv86rX89rVvbPszxZw3O0RnbzfOz7fbbV7tNfd9W0vaRZMvtqbZrtf04bdcXAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAvfwByQZZOqVa8TYAAAAASUVORK5CYII=
-        """
+        // 使用一个真实生成的有效PNG图片（100x100像素，包含简单蓝色方块）
+        // 使用 Python PIL 生成的标准 PNG 格式，确保被所有 API 提供商接受
+        // 100x100 = 10000 像素，满足最小尺寸要求
+        let testImageBase64 = "iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAIAAAD/gAIDAAABGElEQVR4nO3cwQlCMRBAQSM2YQf2Y532YweWEQ+eBZ+RL+LMPSE89hbYMefc8Zr9tx/wS8QKxArECsQKxArECsQKxArECsQKxArECsQKxArECsQKxArECg4rh8f41DM29favg8kKlibr4XK9rV+yjfPpuHLcZAViBWIFYgViBWIFYgViBWIFYgViBWIFYgViBWIFYgViBWIFYgViBWIFYgViBWIFYgViBWIFYgViBWIFYgViBWIFYgViBWIFYgViBWIFYgViBWIFYgViBWIFYgViBWIFYgViBWIFYgViBWIFYgViBWNlxbn1Kjy1tF7l3/bum6xArECsQKxArECsQKxArECsQKxArECsQKxArECsQKxArECs4A7r9w/FqL3ZpQAAAABJRU5ErkJggg=="
         
         guard let url = URL(string: config.endpoint) else {
             throw APIError.invalidURL
