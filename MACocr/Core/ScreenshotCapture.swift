@@ -53,14 +53,18 @@ class ScreenshotCapture: NSObject, @unchecked Sendable {
     }
     
     private func performScreenCapture() {
+        // 创建临时文件路径
+        let tempDir = NSTemporaryDirectory()
+        let tempFilePath = (tempDir as NSString).appendingPathComponent("macocr_screenshot_\(UUID().uuidString).png")
+        
         let task = Process()
         task.launchPath = "/usr/sbin/screencapture"
-        task.arguments = ["-i", "-c"] // -i: 交互式截图, -c: 复制到剪贴板
+        task.arguments = ["-i", tempFilePath] // -i: 交互式截图, 保存到临时文件
         
         task.terminationHandler = { [weak self] process in
             if process.terminationStatus == 0 {
                 DispatchQueue.main.async {
-                    self?.processScreenshot()
+                    self?.processScreenshot(from: tempFilePath)
                 }
             }
         }
@@ -68,13 +72,11 @@ class ScreenshotCapture: NSObject, @unchecked Sendable {
         task.launch()
     }
     
-    private func processScreenshot() {
-        // 从剪贴板获取图像
-        let pasteboard = NSPasteboard.general
-        
-        guard let imageData = pasteboard.data(forType: .tiff),
-              let image = NSImage(data: imageData) else {
-            showAlert(title: "错误", message: "无法获取截图数据")
+    private func processScreenshot(from filePath: String) {
+        // 从文件读取图像
+        guard let image = NSImage(contentsOfFile: filePath) else {
+            // 用户可能取消了截图
+            try? FileManager.default.removeItem(atPath: filePath)
             return
         }
         
@@ -82,8 +84,12 @@ class ScreenshotCapture: NSObject, @unchecked Sendable {
         guard let pngData = image.pngData(),
               let base64String = pngData.base64EncodedString() as String? else {
             showAlert(title: "错误", message: "图像转换失败")
+            try? FileManager.default.removeItem(atPath: filePath)
             return
         }
+        
+        // 清理临时文件
+        try? FileManager.default.removeItem(atPath: filePath)
         
         // 调用 API 进行 OCR
         performOCR(with: base64String)
